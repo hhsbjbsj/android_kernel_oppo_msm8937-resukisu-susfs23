@@ -31,6 +31,14 @@
 #include "btfm_slim.h"
 #include "btfm_slim_slave.h"
 #endif
+
+#ifndef QCA_HSP_SOC_ID_0100
+#define QCA_HSP_SOC_ID_0100 0x400C0100
+#define QCA_HSP_SOC_ID_0110 0x400C0110
+#define QCA_HSP_SOC_ID_0200 0x400C0200
+#define QCA_HSP_SOC_ID_0210 0x400C0210
+#define QCA_HSP_SOC_ID_1211 0x400C1211
+#endif
 #include <linux/fs.h>
 
 #define BT_PWR_DBG(fmt, arg...)  pr_debug("%s: " fmt "\n", __func__, ## arg)
