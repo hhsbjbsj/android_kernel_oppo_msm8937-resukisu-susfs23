@@ -27,6 +27,8 @@
 #include <linux/clk/msm-clk-provider.h>
 #include <trace/events/power.h>
 
+#if defined(CONFIG_DEBUG_FS)
+
 
 #include "clock.h"
 
@@ -719,3 +721,5 @@ void clock_debug_print_enabled(bool print_parent)
 		clock_debug_print_enabled_debug_suspend(NULL);
 
 }
+
+#endif /* CONFIG_DEBUG_FS */
