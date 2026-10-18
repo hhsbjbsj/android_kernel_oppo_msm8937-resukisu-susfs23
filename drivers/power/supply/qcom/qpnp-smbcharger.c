@@ -45,6 +45,19 @@
 #include <linux/pmic-voter.h>
 #if IS_ENABLED(CONFIG_MACH_XIAOMI_MSM8953)
 #include <xiaomi-msm8953/mach.h>
+#else
+static inline int xiaomi_msm8953_mach_get(void) { return 0; }
+enum {
+	XIAOMI_MSM8953_MACH_NONE = 0,
+	XIAOMI_MSM8953_MACH_ROSY,
+	XIAOMI_MSM8953_MACH_YSL,
+	XIAOMI_MSM8953_MACH_VINCE,
+	XIAOMI_MSM8953_MACH_MIDO,
+	XIAOMI_MSM8953_MACH_MARKW,
+	XIAOMI_MSM8953_MACH_SAKURA,
+	XIAOMI_MSM8953_MACH_TIFFANY,
+	XIAOMI_MSM8953_MACH_TISSOT,
+};
 #endif
 #include <linux/iio/consumer.h>
 
