@@ -46,6 +46,14 @@ bool lcm_ffbm_mode = 0;
 
 struct mdss_dsi_ctrl_pdata *change_par_ctrl;
 
+#ifndef _NVT_CSOT_ESD_DEFINED
+#define _NVT_CSOT_ESD_DEFINED
+struct NVT_CSOT_ESD {
+	bool nova_csot_panel;
+	bool ESD_TE_status;
+};
+#endif
+
 static struct NVT_CSOT_ESD nvt_csot_esd = {
 	.nova_csot_panel = false,
 	.ESD_TE_status = false
