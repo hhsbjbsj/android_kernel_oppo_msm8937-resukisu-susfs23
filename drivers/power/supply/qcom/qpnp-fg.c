@@ -8068,10 +8068,13 @@ static int fg_common_hw_init(struct fg_chip *chip)
 	}
 
 	rc = fg_mem_masked_write(chip, settings[FG_MEM_DELTA_SOC].address, 0xFF,
+#if IS_ENABLED(CONFIG_MACH_XIAOMI_MSM8953)
 		(xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_MIDO ||
 		 xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_SAKURA ||
 		 xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_VINCE ||
-		 xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_TISSOT) ? 1 : settings[FG_MEM_DELTA_SOC].value,
+		 xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_TISSOT) ? 1 :
+#endif
+		settings[FG_MEM_DELTA_SOC].value,
 		settings[FG_MEM_DELTA_SOC].offset);
 	
 	if (rc) {
