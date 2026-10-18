@@ -29,7 +29,7 @@ on:
         description: '要构建的目标，逗号分隔（留空 = 全部）：base,R9s'
         required: false
         type: string
-        default: 'base'
+        default: 'A57'
       publish_release:
         description: '是否发布到 GitHub Releases'
         required: false
@@ -110,11 +110,8 @@ jobs:
           # 让 qpnp-fg 走 xiaomi_msm8953_mach_get() 返回 UNKNOWN 的分支。
           BASE_FRAGMENTS = "vendor/mi8953.config"
           OPPO = "vendor/oppo-16017.config"
-          # 纯净版：显式关掉 KernelSU（config KSU 是 default y，
-          # 不关的话编出来一定自带 BakaSU）。
+          OPPO_A57 = "vendor/oppo-a57.config"
           NOKSU = "vendor/oppo-no-ksu.config"
-          # BPF + 容器（droidspaces）支持：完整 namespace 全集、
-          # cgroup 控制器、BPF 显式重申。详见该 fragment 头部注释。
           BPFC = "vendor/oppo-bpf-containers.config"
           targets = [
             {
@@ -125,7 +122,6 @@ jobs:
               "allow_fail": False,
             },
             {
-              # 默认目标：纯净内核（无 root），用于验证功能修复
               "target": "R9s", "label": "R9s (clean, no root)",
               "defconfig": "vendor/msm8953-perf_defconfig",
               "fragments": BASE_FRAGMENTS + " " + OPPO + " " + NOKSU + " " + BPFC,
@@ -134,13 +130,28 @@ jobs:
               "allow_fail": True,
             },
             {
-              # 保留一份带 KernelSU 的产物，便于对照/将来合入
               "target": "R9s-ksu", "label": "R9s (with KernelSU)",
               "defconfig": "vendor/msm8953-perf_defconfig",
               "fragments": BASE_FRAGMENTS + " " + OPPO,
               "device_names": "r9s|R9s|16017|16027|msm8953",
               "soc": "MSM8953", "snapdragon": "Snapdragon 625",
               "allow_fail": True,
+            },
+            {
+              "target": "A57", "label": "A57 (clean, no root)",
+              "defconfig": "vendor/msm8953-perf_defconfig",
+              "fragments": BASE_FRAGMENTS + " " + OPPO_A57 + " " + NOKSU + " " + BPFC,
+              "device_names": "a57|A57|16061|msm8937|msm8940",
+              "soc": "MSM8937/MSM8940", "snapdragon": "Snapdragon 435",
+              "allow_fail": False,
+            },
+            {
+              "target": "A57-ksu", "label": "A57 (with KernelSU)",
+              "defconfig": "vendor/msm8953-perf_defconfig",
+              "fragments": BASE_FRAGMENTS + " " + OPPO_A57,
+              "device_names": "a57|A57|16061|msm8937|msm8940",
+              "soc": "MSM8937/MSM8940", "snapdragon": "Snapdragon 435",
+              "allow_fail": False,
             },
           ]
 

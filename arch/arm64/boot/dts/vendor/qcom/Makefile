@@ -629,6 +629,9 @@ endif
 dtb-$(CONFIG_MACH_16017) += msm8953-mtp_16017.dtb
 dtb-$(CONFIG_MACH_16027) += msm8953-mtp_16027.dtb
 
+# OPPO A57 (MSM8937/MSM8940)板级 DTB
+dtb-$(CONFIG_MACH_16061) += msm8937-pmi8950-mtp_16061.dtb
+
 always		:= $(dtb-y)
 subdir-y	:= $(dts-dirs)
 clean-files    := *.dtb *.dtbo
